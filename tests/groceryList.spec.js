@@ -9,7 +9,7 @@ const GROCERIES = [
 ];
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("http://127.0.0.1:5500/index.html");
+  await page.goto("http://localhost:8080/");
   await addTwoGroceryItemsToLocalStorage(page, GROCERIES);
   await displayLocalStorageGroceryItemsInDOM(page);
 });
@@ -173,15 +173,15 @@ async function addTwoGroceryItemsToLocalStorage(page, items) {
 async function displayLocalStorageGroceryItemsInDOM(page) {
   await page.evaluate(() => {
     // Retrieve items from localStorage and parse them
-    const storedItems = getLocalStorage();
+    const storedItems = window["getLocalStorage"]();
 
     // Check if items are retrieved and not null
     if (storedItems && Array.isArray(storedItems)) {
       storedItems.forEach((itemData) => {
-        window.createListItem(itemData.id, itemData.name);
+        window["createListItem"](itemData.id, itemData.name);
       });
     }
 
-    window.displayGroceryContainer();
+    window["displayGroceryContainer"]();
   });
 }

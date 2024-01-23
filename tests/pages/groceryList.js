@@ -17,7 +17,7 @@ class GroceryListPage {
 
   // goes to specified url
   async load() {
-    await this.page.goto("http://127.0.0.1:5500/index.html");
+    await this.page.goto("http://localhost:8080");
   }
 
   // check pages displays
